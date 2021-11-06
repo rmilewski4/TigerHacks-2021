@@ -1,11 +1,12 @@
-
+import java.io.*;
 
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("test");
         location loc = new location();
         satellite satellites = new satellite();
-        //satellites.refresh(0.0,0.0);
-        System.out.println(loc.alt);
+        satellites.refresh(loc.lat,loc.lon,loc.alt);
+        System.out.println(satellites.sats.get(0).satname);
+        image imagefile = new image(loc.lat,loc.lon);
     }
 }

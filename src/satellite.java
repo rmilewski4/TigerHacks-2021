@@ -6,28 +6,32 @@ import java.util.ArrayList;
 
 
 public class satellite {
-    String link = "https://api.spacexdata.com/v4/starlink";
+    
 
     ArrayList<satellitetype> sats = new ArrayList<satellitetype>();
 
-    public void refresh(double lat, double lon) {
+    public void refresh(double lat, double lon, double alt) {
+        String link = "https://api.n2yo.com/rest/v1/satellite/above/" + Double.toString(lat) + "/" + Double.toString(lon) + "/" + Double.toString(alt) + "/70/0/&apiKey=3DM8MB-57EGHM-ZBX8TF-4SV3";
         HttpClient client = HttpClient.newHttpClient();
    		HttpRequest request = HttpRequest.newBuilder()
         	 .uri(URI.create(link))
 			 .build();
 			  
    		var response = client.sendAsync(request, BodyHandlers.ofString())
-             .thenApply(HttpResponse::body)
-            // .thenAccept(System.out::println)
+        	 .thenApply(HttpResponse::body)
 			 .join();
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-        satellitetype[] satellites = gson.fromJson(response, satellitetype[].class);
-        /*for (satellitetype spaceTrash : satellites) {
-            
-            System.out.println(spaceTrash.spaceTrack.OBJECT_NAME);
-            System.out.println(spaceTrash.latitude + "\n");
-        } */
-        System.out.println(satellites[1000].latitude);
+
+		GsonBuilder builder = new GsonBuilder(); 
+		builder.setPrettyPrinting(); 
+		Gson gson = builder.create();
+
+		JsonObject responseJson = new Gson().fromJson(response, JsonObject.class);
+		JsonArray responseArray = new Gson().fromJson(responseJson.get("above").toString(), JsonArray.class);
+        satellitetype[] satellites = gson.fromJson(responseArray, satellitetype[].class);
+        sats.clear();
+        for (satellitetype spaceTrash : satellites) {
+            sats.add(spaceTrash);
+        }
+        
     }
 }
