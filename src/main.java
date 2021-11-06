@@ -8,6 +8,7 @@ public class main {
        // satellites.refresh(loc.lat,loc.lon,loc.alt);
         //System.out.println(satellites.sats.get(0).satname);
         image imagefile = new image();
+        
         while(true) {
             satellites.refresh(loc.lat,loc.lon,loc.alt);
             imagefile.refresh(loc.lat,loc.lon,satellites.sats);

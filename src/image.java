@@ -7,6 +7,7 @@ import com.google.gson.*;
 import javax.imageio.*;
 import java.io.*;
 import java.util.ArrayList; 
+import java.lang.Math;
 
 public class image {
     BufferedImage myPicture = null;
@@ -36,12 +37,19 @@ public class image {
     }*/
     public void refresh(double lat, double lon,ArrayList<satellitetype> sats) throws IOException {
         String link = "https://maps.googleapis.com/maps/api/staticmap?center=%22" + Double.toString(lat) + "," + Double.toString(lon) + "%22&maptype=hybrid&style=road.highway&size=1000x1000&zoom=8&key=AIzaSyDUBTNpv8NESX8ipwc8PTqqHkON7vUlEBs";
-		String labels = "&markers=color:red%7C";
+		String labels = "";
+		String key = "<html> Satellites: <br/>";
+		char char_label='A';
 		for (satellitetype satallite : sats) {
-			labels += Double.toString(satallite.satlat)+ "," + Double.toString(satallite.satlng) + "%7C";
+			labels += "&markers=color:red%7Clabel:"+char_label+ "%7C" + Double.toString(satallite.satlat)+ "," + Double.toString(satallite.satlng) + "%7C";
+			key += "Satellite " + char_label + ": " + satallite.satname + "<br/>";
+            key += "&#9Altitude " + char_label + ": " + Math.round(satallite.satalt) + " km<br/>";
+			char_label+=1;
+            System.out.println(satallite.satname);
+
 		}
+		key+= "</html>";
 		link+=labels;
-		System.out.println(link.charAt(205));
 		HttpClient client = HttpClient.newHttpClient();
    		HttpRequest request = HttpRequest.newBuilder()
         	 .uri(URI.create(link))
@@ -50,9 +58,8 @@ public class image {
    		var response = client.sendAsync(request, BodyHandlers.ofString())
         	 .thenApply(HttpResponse::body)
 			 .join();
-		System.out.println(link);
 		URL url = new URL(link);
 		image = ImageIO.read(url);
-		window = new DisplayImage(image);
+		window = new DisplayImage(image,key);
     }
 }

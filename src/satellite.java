@@ -31,12 +31,9 @@ public class satellite {
         satellitetype[] satellites = gson.fromJson(responseArray, satellitetype[].class);
         sats.clear();
         for (satellitetype spaceTrash : satellites) {
-			if ((Math.abs(spaceTrash.satlat -lat) <=1.8) && (Math.abs(spaceTrash.satlng -lon )<=1.8) ) {
+			if ((Math.abs(spaceTrash.satlat -lat) <=1.5) && (Math.abs(spaceTrash.satlng -lon )<=1.5) ) {
 				sats.add(spaceTrash);
 			}
         }
-        /*for(int i = 0; i < sats.size(); i++) {
-            System.out.println(sats.get(i).satname);
-        }*/
     }
 }
