@@ -3,6 +3,7 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.net.*;
 import com.google.gson.*;
 import java.util.ArrayList; 
+import java.lang.Math;
 
 
 public class satellite {
@@ -30,8 +31,12 @@ public class satellite {
         satellitetype[] satellites = gson.fromJson(responseArray, satellitetype[].class);
         sats.clear();
         for (satellitetype spaceTrash : satellites) {
-            sats.add(spaceTrash);
+			if ((Math.abs(spaceTrash.satlat -lat) <=1.8) && (Math.abs(spaceTrash.satlng -lon )<=1.8) ) {
+				sats.add(spaceTrash);
+			}
         }
-        
+        /*for(int i = 0; i < sats.size(); i++) {
+            System.out.println(sats.get(i).satname);
+        }*/
     }
 }

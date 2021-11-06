@@ -10,23 +10,28 @@ import java.awt.image.AffineTransformOp;
 import java.awt.geom.AffineTransform;
 
 public class DisplayImage {
+    JFrame frame;
     public DisplayImage(BufferedImage img) throws IOException
     {
-        BufferedImage before = img;
-        int w = before.getWidth();
-        int h = before.getHeight();
-        w=721;
-        h=721;
-        System.out.println("Height = " + h + " Width = " + w);
-        BufferedImage after = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        AffineTransform at = new AffineTransform();
-        at.scale(721.0/2048,721.0/2048);
-        AffineTransformOp scaleOp = 
-        new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-        after = scaleOp.filter(before, after);
+        int w = img.getWidth();
+        int h = img.getHeight();
 
-        ImageIcon icon=new ImageIcon(after);
-        JFrame frame=new JFrame();
+        ImageIcon icon=new ImageIcon(img);
+        frame=new JFrame();
+        frame.setLayout(new FlowLayout());
+        frame.setSize(w,h);
+        JLabel lbl=new JLabel();
+        lbl.setIcon(icon);
+        frame.add(lbl);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    public void refresh(BufferedImage img) throws IOException {
+        int w = img.getWidth();
+        int h = img.getHeight();
+
+        ImageIcon icon=new ImageIcon(img);
+        frame=new JFrame();
         frame.setLayout(new FlowLayout());
         frame.setSize(w,h);
         JLabel lbl=new JLabel();
