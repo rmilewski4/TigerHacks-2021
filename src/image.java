@@ -10,7 +10,7 @@ public class image {
     BufferedImage myPicture = null;
 
     public image(double lat, double lon) throws IOException {
-        String link = "https://api.nasa.gov/planetary/earth/imagery?lon=" + Double.toString(lon) + "&lat=" + Double.toString(lat) + "&api_key=7kdEcYGWn9fxCcqJ59Jyig1JqxGnQhSmWhjRdyCG";
+        String link = "https://api.nasa.gov/planetary/earth/imagery?lon=" + Double.toString(lon) + "&lat=" + Double.toString(lat) + "&dim=0.64&api_key=7kdEcYGWn9fxCcqJ59Jyig1JqxGnQhSmWhjRdyCG";
         HttpClient client = HttpClient.newHttpClient();
    		HttpRequest request = HttpRequest.newBuilder()
         	 .uri(URI.create(link))
@@ -19,8 +19,10 @@ public class image {
    		var response = client.sendAsync(request, BodyHandlers.ofString())
         	 .thenApply(HttpResponse::body)
 			 .join();
+		System.out.println(link);
 		URL url = new URL(link);
-		Image image = ImageIO.read(url);
+		BufferedImage image = ImageIO.read(url);
+		DisplayImage window = new DisplayImage(image);
         //myPicture = ImageIO.read(img);
     }
 }
