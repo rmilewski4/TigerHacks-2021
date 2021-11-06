@@ -2,4 +2,12 @@
 TigerHacks 2021 
 
 API's: 
-https://api.nasa.gov/
+
+Satellite Tracking:
+https://www.n2yo.com/api/
+
+Google Maps Static Image:
+https://developers.google.com/maps/documentation/maps-static/overview
+
+Location Tracker API:
+https://getgeoapi.com/
