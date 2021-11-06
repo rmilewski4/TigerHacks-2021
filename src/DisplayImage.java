@@ -7,28 +7,37 @@ import javax.swing.*;
 import java.awt.image.AffineTransformOp;
 import java.awt.geom.AffineTransform;
 import java.awt.*;
+
 public class DisplayImage {
     JFrame frame;
-    JLabel key = new JLabel();
-    public DisplayImage(BufferedImage img, String compass) throws IOException
-    {
-        int w = img.getWidth();
-        int h = img.getHeight();
+    JLabel key;
+    JLabel lbl;
+    ImageIcon icon;
 
-        ImageIcon icon=new ImageIcon(img);
-        frame=new JFrame();
+    public DisplayImage() throws IOException {
+
+        frame = new JFrame();
+        frame.setSize(1200, 1000);
+        key = new JLabel();
+        lbl = new JLabel();
+
+        frame.setVisible(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void refresh(BufferedImage img, String compass) throws IOException {
+        // frame.removeAll();
+        // frame.setVisible(false);
+        frame.setSize(1200, 1000);
+        icon = new ImageIcon(img);
         frame.setLayout(new GridLayout());
-        frame.setSize(w+200,h);
-        JLabel lbl=new JLabel();
         key.setText(compass);
-        key.setFont(new Font("Calibri", Font.BOLD, 30));
         lbl.setIcon(icon);
+        key.setFont(new Font("Calibri", Font.BOLD, 30));
         frame.add(lbl);
         frame.pack();
         frame.add(key);
         frame.pack();
-
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
