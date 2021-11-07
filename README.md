@@ -5,7 +5,9 @@ This project was created to track satellites using the user's IP Address, then d
 show them moving across that map. You can also make the map bigger/smaller, and choose what satellites you want to display.
 
 TO TRY THE PROJECT OUT YOURSELF:
-Download the .jar file from the repository and open it. The project should then open automatically!
+Make sure you are running the latest versions of JDK and JRE!
+
+Download the .jar file from the repository and open it. The project will then open automatically!
 
 
 API's: 
