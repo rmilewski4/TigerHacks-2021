@@ -43,4 +43,8 @@ public class image {
 	public int getZoom() {
 		return window.zoom;
 	}
+
+	public int getCategory() {
+		return window.category;
+	}
 }

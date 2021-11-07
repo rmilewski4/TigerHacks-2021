@@ -7,11 +7,13 @@ public class main {
         satellite satellites = new satellite();
         image imagefile = new image();
         int zoom = 8;
+        int catagory = 0;
         while (true) {
-            satellites.refresh(loc.lat, loc.lon, loc.alt, zoom);
+            satellites.refresh(loc.lat, loc.lon, loc.alt, zoom, catagory);
             imagefile.refresh(loc.lat, loc.lon, satellites.sats, zoom);
             Thread.sleep(750);
             zoom = imagefile.getZoom();
+            catagory = imagefile.getCategory();
         }
     }
 }

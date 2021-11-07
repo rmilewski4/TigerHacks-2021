@@ -9,9 +9,10 @@ public class satellite {
 
 	ArrayList<satellitetype> sats = new ArrayList<satellitetype>();
 
-	public void refresh(double lat, double lon, double alt, int zoom) {
+	public void refresh(double lat, double lon, double alt, int zoom, int catagory) {
 		String link = "https://api.n2yo.com/rest/v1/satellite/above/" + Double.toString(lat) + "/"
-				+ Double.toString(lon) + "/" + Double.toString(alt) + "/70/0/&apiKey=3DM8MB-57EGHM-ZBX8TF-4SV3";
+				+ Double.toString(lon) + "/" + Double.toString(alt) + "/70/" + Double.toString(catagory + 0.0)
+				+ "/&apiKey=3DM8MB-57EGHM-ZBX8TF-4SV3";
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(link)).build();
 
