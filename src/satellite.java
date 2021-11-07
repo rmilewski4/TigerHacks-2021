@@ -9,7 +9,7 @@ public class satellite {
 
 	ArrayList<satellitetype> sats = new ArrayList<satellitetype>();
 
-	public void refresh(double lat, double lon, double alt) {
+	public void refresh(double lat, double lon, double alt, int zoom) {
 		String link = "https://api.n2yo.com/rest/v1/satellite/above/" + Double.toString(lat) + "/"
 				+ Double.toString(lon) + "/" + Double.toString(alt) + "/70/0/&apiKey=3DM8MB-57EGHM-ZBX8TF-4SV3";
 		HttpClient client = HttpClient.newHttpClient();
@@ -25,8 +25,28 @@ public class satellite {
 		JsonArray responseArray = new Gson().fromJson(responseJson.get("above").toString(), JsonArray.class);
 		satellitetype[] satellites = gson.fromJson(responseArray, satellitetype[].class);
 		sats.clear();
+
+		double width = 0;
+		switch (zoom) {
+		case 7:
+			width = 3.4;
+			break;
+		case 8:
+			width = 1.5;
+			break;
+		case 9:
+			width = .9;
+			break;
+		case 10:
+			width = .45;
+			break;
+		default:
+			width = 1.5;
+			break;
+		}
+
 		for (satellitetype spaceTrash : satellites) {
-			if ((Math.abs(spaceTrash.satlat - lat) <= 1.5) && (Math.abs(spaceTrash.satlng - lon) <= 1.5)) {
+			if ((Math.abs(spaceTrash.satlat - lat) <= width) && (Math.abs(spaceTrash.satlng - lon) <= width)) {
 				sats.add(spaceTrash);
 			}
 		}

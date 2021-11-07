@@ -1,15 +1,17 @@
 import java.io.*;
 
 public class main {
+
     public static void main(String[] args) throws IOException, InterruptedException {
         location loc = new location();
         satellite satellites = new satellite();
         image imagefile = new image();
-
+        int zoom = 8;
         while (true) {
-            satellites.refresh(loc.lat, loc.lon, loc.alt);
-            imagefile.refresh(loc.lat, loc.lon, satellites.sats);
-            Thread.sleep(1500);
+            satellites.refresh(loc.lat, loc.lon, loc.alt, zoom);
+            imagefile.refresh(loc.lat, loc.lon, satellites.sats, zoom);
+            Thread.sleep(750);
+            zoom = imagefile.getZoom();
         }
     }
 }
