@@ -14,3 +14,6 @@ https://developers.google.com/maps/documentation/maps-static/overview
 
 Location Tracker API:
 https://getgeoapi.com/
+
+Altitude Finder API:
+https://www.open-elevation.com/
