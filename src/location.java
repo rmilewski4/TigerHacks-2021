@@ -3,12 +3,6 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.net.*;
 import com.google.gson.*;
 
-class results {
-	public double latitude;
-	public double longitude;
-	public double elevation;
-}
-
 public class location {
 	double lat = 0;
 	double lon = 0;
