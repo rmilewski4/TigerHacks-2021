@@ -1,9 +1,7 @@
 import java.net.http.*;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.net.*;
-import java.awt.*;
 import java.awt.image.*;
-import com.google.gson.*;
 import javax.imageio.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -41,23 +39,21 @@ public class image {
 				+ Double.toString(lon)
 				+ "%22&maptype=hybrid&style=road.highway&size=1000x1000&zoom=8&key=AIzaSyDUBTNpv8NESX8ipwc8PTqqHkON7vUlEBs";
 		String labels = "";
-		String key = "<html> Satellites: <br/>";
+		String key = "<html> Satellites: <br/><br/>";
 		char char_label = 'A';
 		for (satellitetype satallite : sats) {
 			labels += "&markers=color:red%7Clabel:" + char_label + "%7C" + Double.toString(satallite.satlat) + ","
 					+ Double.toString(satallite.satlng) + "%7C";
 			key += "Satellite " + char_label + ": " + satallite.satname + "<br/>";
-			key += "&#9Altitude " + char_label + ": " + Math.round(satallite.satalt) + " km<br/>";
+			key += "Altitude " + char_label + ": " + Math.round(satallite.satalt) + " km<br/><br/>";
 			char_label += 1;
-			System.out.println(satallite.satname);
-
 		}
 		key += "</html>";
 		link += labels;
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(link)).build();
 
-		var response = client.sendAsync(request, BodyHandlers.ofString()).thenApply(HttpResponse::body).join();
+		client.sendAsync(request, BodyHandlers.ofString()).thenApply(HttpResponse::body).join();
 		URL url = new URL(link);
 		image = ImageIO.read(url);
 		window.refresh(image, key);
