@@ -16,9 +16,9 @@ public class DisplayImage {
     JComboBox categories;
     int zoom = 8;
     int category = 0;
-    String[] cats = { "Select Satellite Type", "All Categories", "Brightest Satellites", "Starlink", "Military", "GPS",
-            "Weather", "Satellite Radio (Sirius XM)", "Television", "Scientific", "Iridium" };
-    int[] cat_ids = { 0, 0, 1, 52, 30, 20, 3, 33, 34, 26, 15 };
+    String[] cats = { "Select Satellite Type", "All Categories", "All Categories (include space junk)", "Starlink",
+            "Military", "GPS", "Weather", "Satellite Radio (Sirius XM)", "Television", "Scientific", "Iridium" };
+    int[] cat_ids = { 0, 0, 1000, 52, 30, 20, 3, 33, 34, 26, 15 };
 
     public DisplayImage() throws IOException {
         frame = new JFrame();

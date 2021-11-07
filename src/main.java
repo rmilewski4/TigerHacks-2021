@@ -11,9 +11,9 @@ public class main {
         while (true) {
             satellites.refresh(loc.lat, loc.lon, loc.alt, zoom, catagory);
             imagefile.refresh(loc.lat, loc.lon, satellites.sats, zoom);
-            Thread.sleep(750);
             zoom = imagefile.getZoom();
             catagory = imagefile.getCategory();
+            Thread.sleep(750);
         }
     }
 }

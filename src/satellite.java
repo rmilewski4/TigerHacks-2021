@@ -10,8 +10,12 @@ public class satellite {
 	ArrayList<satellitetype> sats = new ArrayList<satellitetype>();
 
 	public void refresh(double lat, double lon, double alt, int zoom, int catagory) {
+		int temp = catagory;
+		if (temp == 1000) {
+			catagory = 0;
+		}
 		String link = "https://api.n2yo.com/rest/v1/satellite/above/" + Double.toString(lat) + "/"
-				+ Double.toString(lon) + "/" + Double.toString(alt) + "/70/" + Double.toString(catagory + 0.0)
+				+ Double.toString(lon) + "/" + Double.toString(alt) + "/70/" + catagory
 				+ "/&apiKey=3DM8MB-57EGHM-ZBX8TF-4SV3";
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(link)).build();
@@ -21,7 +25,6 @@ public class satellite {
 		GsonBuilder builder = new GsonBuilder();
 		builder.setPrettyPrinting();
 		Gson gson = builder.create();
-
 		JsonObject responseJson = new Gson().fromJson(response, JsonObject.class);
 		JsonArray responseArray = new Gson().fromJson(responseJson.get("above").toString(), JsonArray.class);
 		satellitetype[] satellites = gson.fromJson(responseArray, satellitetype[].class);
@@ -48,6 +51,13 @@ public class satellite {
 
 		for (satellitetype spaceTrash : satellites) {
 			if ((Math.abs(spaceTrash.satlat - lat) <= width) && (Math.abs(spaceTrash.satlng - lon) <= width)) {
+				if ((spaceTrash.satname.indexOf("DEB") > -1)) {
+					if ((temp != 1000)) {
+						continue;
+					}
+
+				}
+
 				sats.add(spaceTrash);
 			}
 		}
