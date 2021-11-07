@@ -28,9 +28,6 @@ public class DisplayImage {
 
     public void refresh(BufferedImage img, String compass) throws IOException {
         frame.setVisible(true);
-        // System.out.println(img.getHeight());
-        // System.out.println(img.getWidth());
-        // frame.setSize(1200, 1000);
         icon = new ImageIcon(img);
         key.setText(compass);
         lbl.setIcon(icon);
