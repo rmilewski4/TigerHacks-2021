@@ -21,7 +21,7 @@ public class image {
 			// key
 			String link = "https://maps.googleapis.com/maps/api/staticmap?center=%22" + Double.toString(lat) + ","
 					+ Double.toString(lon) + "%22&maptype=hybrid&style=road.highway&size=1000x1000&zoom=" + zoom
-					+ "&key=AIzaSyDUBTNpv8NESX8ipwc8PTqqHkON7vUlEBs";
+					+ "&key=/*APIKEYGOESHERE*/";
 			// creates string that will contain the location and label of each satellite to
 			// display on the map
 			String labels = "";
